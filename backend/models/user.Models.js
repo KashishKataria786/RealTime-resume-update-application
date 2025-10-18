@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
       company: { type: String, required: true },
       typeOfEmployment: {
         type: String,
-        enum: ["internship", "fullTime", "partTime"],
+        enum: ["Internship", "FullTime", "PartTime"],
         required: true,
       },
       duration: { type: String },

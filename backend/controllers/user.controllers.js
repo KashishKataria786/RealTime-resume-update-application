@@ -31,7 +31,6 @@ export const userRegister = async (req,res) => {
   }
 };
 
-
 export const userLogin = async(req,res) => {
   try {
     const { email, password } = req.body;
@@ -60,3 +59,5 @@ export const userLogin = async(req,res) => {
     return res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+

@@ -5,6 +5,7 @@ import cors from 'cors';
 import connectDatabase from './config/db.js'
 import userRouter from './routes/user.routes.js';
 import resumeDataRoutes from './routes/resumeData.routes.js';
+import webhookRouter from './routes/webhook.routes.js';
 const app = express();
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.get('/', (req,res)=>{
 })
 app.use('/api/auth',userRouter);
 app.use('/api/resume',resumeDataRoutes);
+app.use('/api/webhook',webhookRouter);
 const PORT = process.env.PORT ||5005
 
 if(process.env.NODE_ENV !=='production'){

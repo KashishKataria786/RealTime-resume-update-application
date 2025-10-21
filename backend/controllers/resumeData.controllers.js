@@ -44,3 +44,143 @@ export const getResumeData = async(req,res)=>{
     return res.status(500).json({ message: "Server error", error: error.message });
   }
 }
+
+export const addProject = async (req, res) => {
+
+    const userId = req.user.id; 
+    
+    const { title, description, techStack, livePreviewLink } = req.body;
+
+ 
+    if (!title) {
+        return res.status(400).json({ success: false, message: 'Project title is required.' });
+    }
+
+    try {
+      
+        const newProject = {
+            title,
+            description,
+            techStack, 
+            livePreviewLink,
+        };
+        const updatedUser = await userModel.findByIdAndUpdate(
+            userId,
+            {
+                $push: {
+                    projects: newProject,
+                },
+            },
+            { 
+                new: true,          
+                runValidators: true 
+            }
+        ).select('-password'); 
+
+        if (!updatedUser) {
+            return res.status(404).json({ success: false, message: 'User not found.' });
+        }
+
+        return res.status(201).json({
+            ok: true,
+            success: true,
+            message: 'Project added successfully.',
+            project: newProject,
+            projectsCount: updatedUser.projects.length,
+        });
+
+    } catch (error) {
+        console.error('Error adding project:', error);
+        
+
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ success: false, message: error.message });
+        }
+
+        return res.status(500).json({ success: false, message: 'Failed to add project due to a server error.' });
+    }
+};
+
+
+
+export const addSummary = async (req, res) => {
+    
+    const userId = req.user.id; 
+    const { summary } = req.body;
+
+    if (summary === undefined) {
+        return res.status(400).json({ success: false, message: 'Professional summary field is required.' });
+    }
+
+    try {
+        
+        const updatedUser = await userModel.findByIdAndUpdate(
+            userId,
+            { $set: { summary: summary } },
+            { 
+                new: true,          
+                runValidators: true 
+            }
+        ).select('summary -_id'); 
+
+        if (!updatedUser) {
+            return res.status(404).json({ success: false, message: 'User not found.' });
+        }
+
+        return res.status(200).json({
+            ok: true,
+            success: true,
+            message: 'Professional summary updated successfully.',
+            professionalSummary: updatedUser.summary,
+        });
+
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ success: false, message: error.message });
+        }
+        return res.status(500).json({ success: false, message: 'Failed to update summary due to a server error.' });
+    }
+};
+
+export const addSkills = async (req, res) => {
+    
+    const userId = req.user.id; 
+    const { skills } = req.body;
+
+    if (skills === undefined) {
+        return res.status(400).json({ success: false, message: 'Skills array is required.' });
+    }
+    
+    if (!Array.isArray(skills)) {
+        return res.status(400).json({ success: false, message: 'Skills must be provided as an array of strings.' });
+    }
+
+    try {
+        
+        const updatedUser = await userModel.findByIdAndUpdate(
+            userId,
+            { $set: { skills: skills } },
+            { 
+                new: true,          
+                runValidators: true 
+            }
+        ).select('skills -_id'); 
+
+        if (!updatedUser) {
+            return res.status(404).json({ success: false, message: 'User not found.' });
+        }
+
+        return res.status(200).json({
+            ok: true,
+            success: true,
+            message: 'Skills updated successfully.',
+            skills: updatedUser.skills,
+        });
+
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ success: false, message: error.message });
+        }
+        return res.status(500).json({ success: false, message: 'Failed to update skills due to a server error.' });
+    }
+};

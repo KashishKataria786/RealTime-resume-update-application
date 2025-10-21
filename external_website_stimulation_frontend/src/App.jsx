@@ -1,12 +1,11 @@
-
 import './App.css'
+import SimulateCourseraForm from './components/SimulateCourseraForm.jsx'
 
 function App() {
 
-
   return (
-    <>
-      <h1>External Website stimulation with kinda same backend</h1>
+    <>  
+      <SimulateCourseraForm/>
     </>
   )
 }

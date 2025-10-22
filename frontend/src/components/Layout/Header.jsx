@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 // Removed the react-icons import to resolve compilation issue. Using a simple text logo instead.
-import { useAuth } from '../../context/AuthContext'; 
+import { useAuth } from '../../context/authContext.jsx'; 
 
 const Header = () => {
 

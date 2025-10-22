@@ -12,7 +12,7 @@ import NotLoggedIn from '../NotLoggedIn.jsx'
 
 const MODAL_COMPONENTS = {
     'Summary': { name: 'Add Summary ', Component: AddSummaryForm },
-    'Skills':{name:"Add Skills", Component:AddSkillsForm},
+    // 'Skills':{name:"Add Skills", Component:AddSkillsForm},
     'Experience': { name: 'Add Experience', Component: AddExperienceForm  },
     'Project': { name: 'Add Project', Component: AddProjectForm   },
     'Course': { name: 'Add Course', Component: AddCourseForm },

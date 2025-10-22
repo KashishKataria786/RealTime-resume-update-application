@@ -55,7 +55,7 @@ app.get('/', (req,res)=>{
 app.use('/api/auth',userRouter);
 app.use('/api/resume',resumeDataRoutes);
 app.use('/api/webhook',webhookRouter);
-const PORT = process.env.PORT ||5005
+const PORT = process.env.PORT 
 
 if(process.env.NODE_ENV !=='production'){
     server.listen(PORT, (req,res)=>{

@@ -57,9 +57,8 @@ app.use('/api/resume',resumeDataRoutes);
 app.use('/api/webhook',webhookRouter);
 const PORT = process.env.PORT || 3000
 
-if(process.env.NODE_ENV !=='production'){
     server.listen(PORT,'0.0.0.0', (req,res)=>{
         console.log(`Server started at PORT ${PORT}`)
     })
-}
+
 export default server;

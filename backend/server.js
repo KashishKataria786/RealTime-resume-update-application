@@ -62,4 +62,4 @@ if(process.env.NODE_ENV !=='production'){
         console.log(`Server started at PORT ${PORT}`)
     })
 }
-export default app;
+export default server;
